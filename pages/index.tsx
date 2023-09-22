@@ -6,6 +6,7 @@ import Nav from "@/sections/Nav";
 import ExplodedViews from "@/sections/ExplodedViews";
 import ClassNames from "@/components/ClassNames";
 import ErrorCodes from "@/sections/ErrorCodes";
+import IntelligentDocs from "@/sections/IntelligentDocs";
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -21,6 +22,7 @@ export default function Home() {
         <Parts />
         <ExplodedViews />
         <ErrorCodes />
+        <IntelligentDocs />
       </main>
     </>
   );
