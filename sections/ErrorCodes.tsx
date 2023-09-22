@@ -114,9 +114,10 @@ export default function ErrorCodes() {
 
   useEffect(() => {
     search.current?.addEventListener("input", (e) => {
-      const value = e.target.value;
+      //@ts-ignore
+      const value = (e.target?.value).toLocaleLowerCase();
 
-      if (value.length > 0) {
+      if (value != undefined && value.length > 0) {
         const filteredCodes = dishwasherErrorCodes.filter((code) =>
           code.code.toLocaleLowerCase().includes(value)
         );
