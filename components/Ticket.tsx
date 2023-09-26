@@ -30,6 +30,7 @@ export default function Ticket({ ticket }: any) {
                   ? "flex-row"
                   : "flex-row-reverse"
               )}
+              key={index}
             >
               <div className="inline-block bg-gray-200 px-3 py-5 rounded-lg">
                 {comment.text}

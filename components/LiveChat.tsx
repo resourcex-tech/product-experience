@@ -49,7 +49,7 @@ export default function LiveChat() {
               <div className="flex flex-col">
                 <div className="text-lg font-medium">Chat with us</div>
                 <div className="text-sm text-gray-500">
-                  We're here to help with all your technical needs
+                  We are here to help with all your technical needs
                 </div>
               </div>
             </div>
