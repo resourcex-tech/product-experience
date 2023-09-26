@@ -6,7 +6,7 @@ import ClassNames from "@/components/ClassNames";
 const parts = [
   {
     name: "Water Filter",
-    image: "./parts/water-filter.png",
+    image: "/parts/water-filter.png",
     partno: "123456",
     price: "$12.99",
     pos: {
@@ -16,7 +16,7 @@ const parts = [
   },
   {
     name: "Ice Maker Assembly",
-    image: "./parts/ice-maker-assembly.png",
+    image: "/parts/ice-maker-assembly.png",
     partno: "133256",
     price: "$15.99",
     pos: {
@@ -26,7 +26,7 @@ const parts = [
   },
   {
     name: "Light Bulb",
-    image: "./parts/light-bulb.png",
+    image: "/parts/light-bulb.png",
     partno: "223436",
     price: "$42.99",
     pos: {
@@ -36,7 +36,7 @@ const parts = [
   },
   {
     name: "Door Gasket",
-    image: "./parts/door-gasket.png",
+    image: "/parts/door-gasket.png",
     partno: "393456",
     price: "$22.99",
     pos: {
@@ -46,7 +46,7 @@ const parts = [
   },
   {
     name: "Turbidity Sensor",
-    image: "./parts/turbidy-sensor.png",
+    image: "/parts/turbidy-sensor.png",
     partno: "553456",
     price: "$32.99",
     pos: {
@@ -56,7 +56,7 @@ const parts = [
   },
   {
     name: "Water Inlet",
-    image: "./parts/water-intet.png",
+    image: "/parts/water-intet.png",
     partno: "623456",
     price: "$52.99",
     pos: {
@@ -88,7 +88,7 @@ export default function InteractiveExplodedView({ toggle }: any) {
       <div className="flex">
         <div className="w-1/2 flex items-center justify-center">
           <div className="relative">
-            <img src="./parts/exploded-view.svg" className="max-w-full" />
+            <img src="/parts/exploded-view.svg" className="max-w-full" />
             {parts.map((part, index) => (
               <div
                 key={index}

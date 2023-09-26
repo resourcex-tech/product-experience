@@ -4,7 +4,7 @@ import ExplodedView from "./ExplodedView";
 import ClassNames from "@/components/ClassNames";
 
 export default function ExplodedViews() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
 
   const [transitioning, setTransitioning] = useState(false);
 

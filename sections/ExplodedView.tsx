@@ -60,7 +60,8 @@ export default function ExplodedView({ toggle }: any) {
         <div className="w-1/2 relative">
           {/* <img src="./parts/exploded-view.png" className="max-w-full" /> */}
           <ImageMagnifier
-            src="./parts/exploded-view-transparent.png"
+            // src="/parts/exploded-view-transparent.png"
+            src="/parts/exploded-view-transparent.png"
             width="100%"
             height="auto"
             magnifierHeight={200}

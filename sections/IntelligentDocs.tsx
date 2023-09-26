@@ -89,7 +89,7 @@ export default function IntelligentDocs() {
           <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
             Intelligent Docs
           </h2>
-          <div className="flex flex-col p-5 bg-slate-200 rounded-xl">
+          <div className="flex flex-col p-5 bg-slate-200 rounded-xl mt-9">
             <div className="flex-1 overflow-y-auto flex flex-col">
               {messages.map((message, index) => (
                 <div
@@ -109,7 +109,7 @@ export default function IntelligentDocs() {
               <div className="flex relative">
                 <input
                   type="text"
-                  className="flex-grow rounded-lg shadow p-3 pb-10 outline-none"
+                  className="flex-grow rounded-lg shadow p-3 pr-6 pb-10 outline-none"
                   placeholder="Type your message..."
                 />
                 <div className="bg-white absolute right-3 top-3 flex flex-col gap-3">
