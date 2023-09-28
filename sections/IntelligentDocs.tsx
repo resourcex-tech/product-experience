@@ -62,7 +62,7 @@ export default function IntelligentDocs() {
           {loading == false && assets?.length === 0 && (
             <div>No Docs Found, Please check back later...</div>
           )}
-          <div className="relative mb-5 flex flex-wrap flex-row gap-5">
+          <div className="relative mb-5 pt-5 flex flex-wrap flex-row gap-5">
             {loading == false ? (
               assets?.map((asset: Asset) => {
                 return (
