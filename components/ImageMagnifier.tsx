@@ -29,6 +29,7 @@ export default function ImageMagnifier({
       <img
         src={src}
         style={{ height: height, width: width }}
+        className="rounded-3xl"
         onMouseEnter={(e) => {
           // update image size and turn-on magnifier
           const elem = e.currentTarget;

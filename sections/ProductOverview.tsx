@@ -1,32 +1,81 @@
+import axios from "axios";
 import SectionGrid from "./SectionGrid";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Model from "@/types/Model";
 
 export default function ProductOverview() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const { pid } = router.query;
+
+  const [model, setModel] = useState({} as Model);
+
+  useEffect(() => {
+    if (pid != undefined) {
+      axios
+        .get(process.env.NEXT_PUBLIC_PRODUCTS_API + "models/" + pid)
+        .then((response) => {
+          setLoading(false);
+          setModel(response.data);
+        });
+    }
+  }, []);
   return (
     <SectionGrid center>
-      <div className="lg:w-1/2 flex justify-center items-center py-16 border rounded-3xl border-slate-100 bg-slate-200">
-        <img
-          src="https://ultimate-product-experience.vercel.app/product.png"
-          alt="Whirlpool KRFF305EBL00"
-          className="object-contain h-96"
-        />
+      <div className="lg:w-1/2">
+        {loading ? (
+          <div className="flex justify-center items-center py-16 border rounded-3xl border-slate-100 bg-slate-200 animate-pulse">
+            <div className="w-96 h-96 rounded-full bg-slate-300 animate-pulse"></div>
+          </div>
+        ) : model.model_stock_photo === null ? (
+          <div className="flex justify-center items-center py-16 border rounded-3xl border-slate-100 bg-slate-200">
+            <div className="w-96 h-96 rounded-full bg-slate-300"></div>
+          </div>
+        ) : (
+          <div className="flex justify-center items-center py-16 border rounded-3xl border-slate-100 bg-white">
+            <img
+              src={model.model_stock_photo}
+              alt={model.model_number}
+              className="object-contain h-96"
+            />
+          </div>
+        )}
       </div>
       <div className="lg:w-1/2 px-10">
-        <div className="text-lg text-gray-600 mb-3">Apple</div>
+        <div className="text-lg text-gray-600 mb-3">
+          {loading ? (
+            <div className="w-20 h-6 rounded-lg bg-slate-200 animate-pulse"></div>
+          ) : (
+            //@ts-ignore
+            model.manufacture_name
+          )}
+        </div>
         <h1 className="text-4xl font-bold text-gray-800">
-          Whirlpool KRFF305EBL00
+          {loading ? (
+            <div className="w-full h-10 rounded-lg bg-slate-200 animate-pulse"></div>
+          ) : (
+            model.model_number
+          )}
         </h1>
         <div className="mt-3">
-          <a href="#" className="text-gray-500 hover:underline">
-            Home
-          </a>
-          <span className="mx-2 text-gray-300">/</span>
-          <a href="#" className="text-gray-500 hover:underline">
-            Refrigerators
-          </a>
-          <span className="mx-2 text-gray-300">/</span>
-          <a href="#" className="text-gray-500 hover:underline">
-            French Door Refrigerators
-          </a>
+          {loading ? (
+            <div className="w-64 h-6 rounded-lg bg-slate-200 animate-pulse"></div>
+          ) : (
+            <>
+              <a href="#" className="text-gray-500 hover:underline">
+                Home
+              </a>
+              <span className="mx-2 text-gray-300">/</span>
+              <a href="#" className="text-gray-500 hover:underline">
+                {model.category_name}
+              </a>
+              {/* <span className="mx-2 text-gray-300">/</span>
+              <a href="#" className="text-gray-500 hover:underline">
+                French Door Refrigerators
+              </a> */}
+            </>
+          )}
         </div>
 
         <div className="mt-7">
