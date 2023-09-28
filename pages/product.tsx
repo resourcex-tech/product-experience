@@ -50,7 +50,7 @@ export default function Product() {
         <Nav active={activeNav} setActive={setActiveNav} />
         {
           {
-            1: <Parts />,
+            1: <Parts setActive={setActiveNav} />,
             2: <ExplodedViews />,
             3: <ErrorCodes />,
             4: <IntelligentDocs />,

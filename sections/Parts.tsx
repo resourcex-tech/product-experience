@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Model, { Part } from "@/types/Model";
 
-export default function Parts() {
+export default function Parts({ setActive }: { setActive: any }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const { pid } = router.query;
@@ -31,7 +31,10 @@ export default function Parts() {
         <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
           Compatible Parts
         </h2>
-        <div className="absolute right-0 -top-2 text-base px-3 rounded-lg flex items-center justify-center hover:bg-blue-100 ">
+        <div
+          className="absolute right-0 -top-2 text-base px-3 rounded-lg flex items-center justify-center hover:bg-blue-100 cursor-pointer"
+          onClick={() => setActive(2)}
+        >
           <span className="py-2">Try out Interactive View</span>
           <i className="fi fi-rr-angle-small-right text-2xl ml-2 leading-[0]" />
         </div>
@@ -63,7 +66,7 @@ export default function Parts() {
             ) : loading ? (
               <>
                 <div className="w-64 drop-shadow-md hover:drop-shadow-lg transition-all cursor-pointer rounded overflow-hidden bg-white py-3 flex flex-col items-center justify-between">
-                  <div className="h-28 w-28 bg-slate-200 rounded-full animate-pulse"></div>
+                  <div className="h-28 w-28 bg-slate-200 rounded-full animate-pulse mb-4"></div>
                   <div className="flex items-center flex-col gap-3">
                     <div className="bg-slate-200 animate-pulse rounded-lg h-4 w-32"></div>
                     <div className="bg-slate-200 animate-pulse rounded-lg h-3 w-24"></div>
