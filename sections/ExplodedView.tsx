@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Model, { Part, Asset } from "@/types/Model";
+import ClassNames from "@/components/ClassNames";
 
 // const parts = [
 //   {
@@ -79,6 +80,7 @@ export default function ExplodedView({ toggle }: any) {
             (asset: Asset) => asset.type == "Exploded Views"
           );
           setImages(explodedViews);
+          setSelectedImage(explodedViews[0]);
         })
         .catch((error) => {
           setLoadingImages(false);
@@ -129,7 +131,10 @@ export default function ExplodedView({ toggle }: any) {
                   key={image.id}
                 >
                   <div
-                    className="w-full h-36 bg-white bg-contain bg-no-repeat bg-center bg-slate-200 rounded-lg border hover:border-blue-600 "
+                    className={ClassNames(
+                      "w-full h-36 bg-white bg-contain bg-no-repeat bg-center bg-slate-200 rounded-lg border hover:border-blue-600",
+                      image.id == selectedImage?.id && "border-blue-600"
+                    )}
                     style={{ backgroundImage: `url(${image.url})` }}
                   ></div>
                   <div className="text-xs text-center font-medium">

@@ -2,6 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import SectionGrid from "./SectionGrid";
 import ClassNames from "@/components/ClassNames";
 
+import axios from "axios";
+import { useRouter } from "next/router";
+import { Asset } from "@/types/Model";
+
 const messages = [
   {
     type: "user",
@@ -26,63 +30,89 @@ const messages = [
 ];
 
 export default function IntelligentDocs() {
-  const [selected, setSelected] = useState<number>();
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const { pid } = router.query;
 
-  const search = useRef<HTMLInputElement>(null);
+  const [assets, setAssets] = useState<Asset[]>([]);
 
   useEffect(() => {
-    search.current?.addEventListener("input", (e) => {
-      //   const value = e.target.value;
-      //   if (value.length > 0) {
-      //   } else {
-      //   }
-    });
+    axios
+      .get(process.env.NEXT_PUBLIC_PRODUCTS_API + "models/" + pid + "/assets")
+      .then((response) => {
+        setLoading(false);
+        let explodedViews = response.data.assets.filter(
+          (asset: Asset) => asset.type == "pdf"
+        );
+        setAssets(explodedViews);
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
   }, []);
 
   return (
     <SectionGrid center row>
       <div className="relative mb-4"></div>
-      <div className="flex">
+      <div className="flex gap-5">
         <div className="w-1/2">
           <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
             Explore Docs
           </h2>
-          <div className="relative mb-5 flex flex-wrap flex-row items-center gap-5">
-            <div className="mt-5 flex items-center gap-5 text-gray-800 transition delay-700 animate-[pulse_0.5s_ease-in-out]">
-              <i className="fi fi-rr-poll-h text-lg p-4 bg-gray-200 rounded-full flex items-center justify-center"></i>
-              <div>
-                <div className="text-sm">Manual-JF42NXFXDE02.PDF</div>
-                <div className="text-xs">Page 25, Line 48</div>
-              </div>
-            </div>
-            <div className="mt-5 flex items-center gap-5 text-gray-800 transition delay-700 animate-[pulse_0.5s_ease-in-out]">
-              <i className="fi fi-rr-poll-h text-lg p-4 bg-gray-200 rounded-full flex items-center justify-center"></i>
-              <div>
-                <div className="text-sm">Manual-JF42NXFXDE02.PDF</div>
-                <div className="text-xs">Page 25, Line 48</div>
-              </div>
-            </div>
-            <div className="mt-5 flex items-center gap-5 text-gray-800 transition delay-700 animate-[pulse_0.5s_ease-in-out]">
-              <i className="fi fi-rr-poll-h text-lg p-4 bg-gray-200 rounded-full flex items-center justify-center"></i>
-              <div>
-                <div className="text-sm">Manual-JF42NXFXDE02.PDF</div>
-                <div className="text-xs">Page 25, Line 48</div>
-              </div>
-            </div>
-            <div className="mt-5 flex items-center gap-5 text-gray-800 transition delay-700 animate-[pulse_0.5s_ease-in-out]">
-              <i className="fi fi-rr-poll-h text-lg p-4 bg-gray-200 rounded-full flex items-center justify-center"></i>
-              <div>
-                <div className="text-sm">Manual-JF42NXFXDE02.PDF</div>
-                <div className="text-xs">Page 25, Line 48</div>
-              </div>
-            </div>
-            <div className="mt-5 flex items-center gap-5 text-gray-800 transition delay-700 animate-[pulse_0.5s_ease-in-out]">
-              <i className="fi fi-rr-poll-h text-lg p-4 bg-gray-200 rounded-full flex items-center justify-center"></i>
-              <div>
-                <div className="text-sm">Manual-JF42NXFXDE02.PDF</div>
-                <div className="text-xs">Page 25, Line 48</div>
-              </div>
-            </div>
+          {loading == false && assets?.length === 0 && (
+            <div>No Docs Found, Please check back later...</div>
+          )}
+          <div className="relative mb-5 flex flex-wrap flex-row gap-5">
+            {loading == false ? (
+              assets?.map((asset: Asset) => {
+                return (
+                  <>
+                    <a
+                      target="_blank"
+                      className="flex flex-col items-center justify-center gap-3 text-gray-800 rounded-lg border w-32 py-4 px-2"
+                      href={asset.url}
+                    >
+                      <i className="w-14 h-14 fi fi-rr-file-pdf text-2xl bg-gray-200 rounded-full flex items-center justify-center"></i>
+                      <div className="text-center">
+                        <div className="text-sm">{asset.description}.pdf</div>
+                        <div className="text-xs">{asset.type}</div>
+                      </div>
+                    </a>
+                  </>
+                );
+              })
+            ) : (
+              <>
+                <div className="flex flex-col items-center justify-center gap-3 text-gray-800 rounded-lg border w-32 py-4 px-2">
+                  <i className="w-14 h-14 bg-gray-200 rounded-full animate-pulse"></i>
+                  <div className="flex gap-3 flex-col items-center">
+                    <div className="h-4 w-16 rounded-lg bg-gray-200 animate-pulse"></div>
+                    <div className="h-3 w-6 rounded-lg bg-gray-200 animate-pulse"></div>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-3 text-gray-800 rounded-lg border w-32 py-4 px-2">
+                  <i className="w-14 h-14 bg-gray-200 rounded-full animate-pulse"></i>
+                  <div className="flex gap-3 flex-col items-center">
+                    <div className="h-4 w-16 rounded-lg bg-gray-200 animate-pulse"></div>
+                    <div className="h-3 w-6 rounded-lg bg-gray-200 animate-pulse"></div>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-3 text-gray-800 rounded-lg border w-32 py-4 px-2">
+                  <i className="w-14 h-14 bg-gray-200 rounded-full animate-pulse"></i>
+                  <div className="flex gap-3 flex-col items-center">
+                    <div className="h-4 w-16 rounded-lg bg-gray-200 animate-pulse"></div>
+                    <div className="h-3 w-6 rounded-lg bg-gray-200 animate-pulse"></div>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-3 text-gray-800 rounded-lg border w-32 py-4 px-2">
+                  <i className="w-14 h-14 bg-gray-200 rounded-full animate-pulse"></i>
+                  <div className="flex gap-3 flex-col items-center">
+                    <div className="h-4 w-16 rounded-lg bg-gray-200 animate-pulse"></div>
+                    <div className="h-3 w-6 rounded-lg bg-gray-200 animate-pulse"></div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div className="w-1/2 flex-col gap-4 relative">
