@@ -11,6 +11,17 @@ const ubuntu = Ubuntu({
   weight: ["300", "400", "500", "700"],
 });
 
+const models = [
+  {
+    model_number: "GSH25JSTASS",
+    model_stock_photo:
+      "https://cdn11.bigcommerce.com/s-pacto3wrn2/images/stencil/1280x1280/products/5902/603743/f814b95c569b0a932bc750e546870a977793efd1__20070.1679180905.jpg",
+    model_id: 548272,
+    category_name: "Refrigerator",
+    manufucture_name: "General Electric",
+  },
+] as unknown as Model[];
+
 export default function Home() {
   const [query, setQuery] = useState("");
   const [selectedModel, setSelectedModel] = useState<Model>({} as Model);
@@ -163,6 +174,17 @@ export default function Home() {
               )}
             </div>
           </Combobox>
+          <div className="my-4 flex items-center">
+            <div className="text-sm mr-3">Popular Models:</div>
+            {models.map((model) => (
+              <div
+                className="px-3 py-1 inline-block border-2 rounded-full text-sm text-gray-600 hover:bg-gray-600 hover:text-gray-200 hover:border-gray-600 cursor-pointer"
+                onClick={() => setSelectedModel(model)}
+              >
+                {model.model_number}
+              </div>
+            ))}
+          </div>
         </div>
       </main>
     </>
