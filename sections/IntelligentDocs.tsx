@@ -100,21 +100,20 @@ export default function IntelligentDocs() {
           )}
           <div className="relative mb-5 pt-5 flex flex-wrap flex-row gap-5">
             {loading == false ? (
-              assets?.map((asset: Asset) => {
+              assets?.map((asset: Asset, index: number) => {
                 return (
-                  <>
-                    <a
-                      target="_blank"
-                      className="flex flex-col items-center justify-center gap-3 text-gray-800 rounded-lg border w-32 py-4 px-2"
-                      href={asset.url}
-                    >
-                      <i className="w-14 h-14 fi fi-rr-file-pdf text-2xl bg-gray-200 rounded-full flex items-center justify-center"></i>
-                      <div className="text-center">
-                        <div className="text-sm">{asset.description}.pdf</div>
-                        <div className="text-xs">{asset.type}</div>
-                      </div>
-                    </a>
-                  </>
+                  <a
+                    key={index}
+                    target="_blank"
+                    className="flex flex-col items-center justify-center gap-3 text-gray-800 rounded-lg border w-32 py-4 px-2"
+                    href={asset.url}
+                  >
+                    <i className="w-14 h-14 fi fi-rr-file-pdf text-2xl bg-gray-200 rounded-full flex items-center justify-center"></i>
+                    <div className="text-center">
+                      <div className="text-sm">{asset.description}.pdf</div>
+                      <div className="text-xs">{asset.type}</div>
+                    </div>
+                  </a>
                 );
               })
             ) : (
