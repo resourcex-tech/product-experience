@@ -176,8 +176,9 @@ export default function Home() {
           </Combobox>
           <div className="my-4 flex items-center">
             <div className="text-sm mr-3">Popular Models:</div>
-            {models.map((model) => (
+            {models.map((model: any, index: any) => (
               <div
+                key={index}
                 className="px-3 py-1 inline-block border-2 rounded-full text-sm text-gray-600 hover:bg-gray-600 hover:text-gray-200 hover:border-gray-600 cursor-pointer"
                 onClick={() => setSelectedModel(model)}
               >

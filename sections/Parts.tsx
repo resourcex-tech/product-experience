@@ -43,15 +43,18 @@ export default function Parts({ setActive }: { setActive: any }) {
         <div className="bg-gradient-to-l from-slate-100 h-full w-36 right-0 absolute z-20"></div>
         <div className="bg-gradient-to-r from-slate-100 h-full w-36 left-0 absolute z-20"></div>
         <div className="overflow-x-scroll flex gap-4 relative pb-5">
-          <div className="flex gap-4 relative pb-5">
+          <div className="flex gap-4 relative pb-5 flex-wrap">
             {loading == false && parts?.length > 0 ? (
-              parts?.map((part: Part) => {
+              parts?.map((part: Part, index: number) => {
+                if (index < 20) {
+                  return;
+                }
                 return (
                   <div className="snap-center w-64 drop-shadow-md hover:drop-shadow-lg transition-all cursor-pointer rounded overflow-hidden bg-white py-3 flex flex-col items-center justify-between">
-                    <img
+                    {/* <img
                       src={"/parts/water-filter.png"}
                       className="h-28 mx-4"
-                    />
+                    /> */}
                     <div>
                       <div className="text-sm text-light text-center mt-2 text-slate-500 px-3">
                         {part.part_name}

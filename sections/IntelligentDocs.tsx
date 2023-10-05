@@ -55,6 +55,42 @@ export default function IntelligentDocs() {
     <SectionGrid center row>
       <div className="relative mb-4"></div>
       <div className="flex gap-5">
+        <div className="w-1/2 flex-col gap-4 relative">
+          <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+            Intelligent Docs
+          </h2>
+          <div className="flex flex-col p-5 bg-slate-200 rounded-xl mt-9">
+            <div className="flex-1 overflow-y-auto flex flex-col">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={ClassNames(
+                    "p-2 max-w-md my-2 rounded-lg text-sm",
+                    message.type === "user"
+                      ? "bg-blue-600 text-white ml-auto"
+                      : "bg-slate-100 mr-auto"
+                  )}
+                >
+                  {message.text}
+                </div>
+              ))}
+            </div>
+            <div className="mt-5">
+              <div className="flex relative">
+                <input
+                  type="text"
+                  className="flex-grow rounded-lg shadow p-3 pr-6 pb-10 outline-none"
+                  placeholder="Type your message..."
+                />
+                <div className="bg-white absolute right-3 top-3 flex flex-col gap-3">
+                  <i className="fi fi-rr-microphone"></i>
+                  <i className="fi fi-rr-paper-plane-top"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="w-1/2">
           <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
             Explore Docs
@@ -113,41 +149,6 @@ export default function IntelligentDocs() {
                 </div>
               </>
             )}
-          </div>
-        </div>
-        <div className="w-1/2 flex-col gap-4 relative">
-          <h2 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-            Intelligent Docs
-          </h2>
-          <div className="flex flex-col p-5 bg-slate-200 rounded-xl mt-9">
-            <div className="flex-1 overflow-y-auto flex flex-col">
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={ClassNames(
-                    "p-2 max-w-md my-2 rounded-lg text-sm",
-                    message.type === "user"
-                      ? "bg-blue-600 text-white ml-auto"
-                      : "bg-slate-100 mr-auto"
-                  )}
-                >
-                  {message.text}
-                </div>
-              ))}
-            </div>
-            <div className="mt-5">
-              <div className="flex relative">
-                <input
-                  type="text"
-                  className="flex-grow rounded-lg shadow p-3 pr-6 pb-10 outline-none"
-                  placeholder="Type your message..."
-                />
-                <div className="bg-white absolute right-3 top-3 flex flex-col gap-3">
-                  <i className="fi fi-rr-microphone"></i>
-                  <i className="fi fi-rr-paper-plane-top"></i>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
