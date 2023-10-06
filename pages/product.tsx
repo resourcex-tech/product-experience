@@ -24,14 +24,14 @@ export default function Product() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
-  const [activeNav, setActiveNav] = useState(1);
+  const [activeNav, setActiveNav] = useState(0);
 
   const [sticky, setSticky] = useState(false);
 
   const nav = useInView({ threshold: 0 });
 
-  const overview = useInView({ threshold: 0.5 });
-  const parts = useInView({ threshold: 0.5 });
+  const overview = useInView({ threshold: 0.4 });
+  const parts = useInView({ threshold: 0.3 });
   const explodedViews = useInView({ threshold: 0.5 });
   const errorCodes = useInView({ threshold: 0.5 });
   const intelligentDocs = useInView({ threshold: 0.6 });
@@ -61,8 +61,10 @@ export default function Product() {
       setActiveNav(3);
     } else if (explodedViews.inView) {
       setActiveNav(2);
-    } else {
+    } else if (parts.inView) {
       setActiveNav(1);
+    } else {
+      setActiveNav(0);
     }
 
     if (nav.inView) {
@@ -75,6 +77,8 @@ export default function Product() {
     errorCodes.inView,
     intelligentDocs.inView,
     support.inView,
+    parts.inView,
+    overview.inView,
     nav.inView,
   ]);
 
